@@ -1,57 +1,70 @@
-const allUserCtrl = require('../controller/userController/allUserCtrl')
+const { allUserCtrl, getByName, userbyId } = require('../controller/userController/allUserCtrl')
 const postUserCtrl = require('../controller/userController/postUserCtrl')
 const updateUserCtrl = require('../controller/userController/updateUserCtrl')
 const deleteUserCtrl = require('../controller/userController/deleteUserCtrl')
 
 
-const allUsers = (req, res) => {
+const allUsers = async (req, res) => {
+    const { name } = req.query;
     try {
-        let aux = allUserCtrl()
-        res.status(200).json(aux)
+        const source = name ? await getByName(name) : await allUserCtrl()
+
+        res.status(200).json(source)
     } catch (error) {
-        res.status(400).json({error: error.message})
+        res.status(400).json({ error: error.message })
     }
 };
 
-        
 
-const postUser = async (req,res)=>{
-    const {name, email, phone, gender}=req.body;
+const getById = async (req, res)=>{
+    const { id } = req.params;
     try {
-         let aux = await postUserCtrl(name, email, gender, phone)
-         res.status(200).json(aux)
-        } catch (error) {
-            res.status(400).json({error: error.message})
-        }
+        const sourceId = id? await userbyId(id): await allUserCtrl()
+        res.status(200).json(sourceId)
+    } catch (error) {
+        res.status(400).json({error:error.message}) 
     }
+}
 
 
-    
-const updateUser = (req,res)=>{
-        try {
-            
-        let update = updateUserCtrl()
-        res.status(200).json(update)    
-             
-    
-        } catch (error) {
-            res.status(400).json({error: error.message})
-            
-        }
+const postUser = async (req, res) => {
+    const { name, email, phone, gender } = req.body;
+    try {
+        let aux = await postUserCtrl(name, email, gender, phone)
+        res.status(200).json(aux)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
     }
-    
+}
 
-const deleteUser = (req,res)=>{
-        try {
-            let deleteGame = deleteUserCtrl()
-            res.status(200).json(deleteGame)
-        } catch (error) {
-            res.status(400).json({error: error.message})
-            
-        }
+
+
+const updateUser = (req, res) => {
+    const { id } = req.params;
+    const { name, email } = req.body;
+    try {
+        let update = updateUserCtrl(name, email, id)
+        res.status(200).json(update)
+
+
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+
     }
-    
-    module.exports ={allUsers, postUser, updateUser, deleteUser}
+}
+
+
+const deleteUser = (req, res) => {
+    try {
+        let deleteGame = deleteUserCtrl()
+        res.status(200).json(deleteGame)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+
+    }
+}
+
+module.exports = { allUsers, postUser, updateUser, deleteUser,getById }
 
 
 
@@ -59,7 +72,7 @@ const deleteUser = (req,res)=>{
 
 
 
-    
+
 
 
 

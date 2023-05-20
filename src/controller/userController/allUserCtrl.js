@@ -1,8 +1,34 @@
+const { User } = require('../../db')
 
 
-const allUserCtrl = ()=>{
-    if(![])throw new Error('Provando fallo')
-    return ('this is the controller to get all games')
+
+const getByName = async (name) => {
+
+    const allUser = await User.findAll()
+
+    const filt = allUser.filter(item => item.name === name)
+
+    return filt
+
 }
 
-module.exports = allUserCtrl;
+
+
+const allUserCtrl = async () => {
+    const aux = await User.findAll()
+    return aux
+
+}
+
+
+const userbyId = async (id) => {
+    const aux = await User.findByPk(id)
+
+    if(!aux) throw new Error('Id not found')
+
+    return aux;
+}
+
+
+
+module.exports = { allUserCtrl, getByName, userbyId }

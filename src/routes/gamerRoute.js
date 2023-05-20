@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const {allUsers, postUser, updateUser, deleteUser} = require('../handlers/gamerHandler')
+const {allUsers, postUser, updateUser, deleteUser,getById} = require('../handlers/gamerHandler')
 
 const user = Router()
 
@@ -9,6 +9,7 @@ user.use((req,res,next)=>{
 })
 user.get('/', allUsers)
 
+user.get('/:id', getById)
 
 user.post('/', postUser)
 
