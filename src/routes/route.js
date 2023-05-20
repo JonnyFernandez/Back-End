@@ -1,13 +1,13 @@
 const { Router } = require('express')
-const gamerR = require('./gamerRoute')
+const user = require('./gamerRoute')
 const playerR = require('./playerRoute')
 
 
 const route = Router()
 
 
-route.use('/gamer', gamerR)
-route.use('/player', playerR)
+route.use('/user', user)
+route.use('/post', playerR)
 
 
 

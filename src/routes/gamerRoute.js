@@ -1,23 +1,20 @@
 const { Router } = require('express')
-const {allGames, postGame, updateGame, deleteGame} = require('../handlers/gamerHandler')
+const {allUsers, postUser, updateUser, deleteUser} = require('../handlers/gamerHandler')
 
-const gamerR = Router()
+const user = Router()
 
-gamerR.use((req,res,next)=>{
-    console.log('reques to allGames provando middleware');
+user.use((req,res,next)=>{
+    console.log('pasando por la ruta <<user>> ');
     next()  
 })
-gamerR.get('/', allGames)
+user.get('/', allUsers)
 
 
-gamerR.post('/', postGame)
+user.post('/', postUser)
 
-gamerR.put('/', updateGame)
+user.put('/', updateUser)
 
-gamerR.delete('/', deleteGame)
-
-
-
+user.delete('/', deleteUser)
 
 
 
@@ -26,4 +23,7 @@ gamerR.delete('/', deleteGame)
 
 
 
-module.exports = gamerR;
+
+
+
+module.exports = user;
