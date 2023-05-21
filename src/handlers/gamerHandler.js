@@ -6,6 +6,7 @@ const deleteUserCtrl = require('../controller/userController/deleteUserCtrl')
 
 const allUsers = async (req, res) => {
     const { name } = req.query;
+    
     // if (![name].every(Boolean)) return res.status(404).send('Flata enviardatos obligatorios')
     
     try {
