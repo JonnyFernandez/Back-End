@@ -13,9 +13,9 @@ user.get('/:id', getById)
 
 user.post('/', postUser)
 
-user.put('/', updateUser)
+user.put('/:id', updateUser)
 
-user.delete('/', deleteUser)
+user.delete('/:id', deleteUser)
 
 
 

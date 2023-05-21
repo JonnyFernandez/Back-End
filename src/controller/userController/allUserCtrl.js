@@ -16,7 +16,16 @@ const getByName = async (name) => {
 
 const allUserCtrl = async () => {
     const aux = await User.findAll()
-    return aux
+    
+    if(aux.length<1){
+        return "empty database"
+        
+    }else{
+        return aux
+    }
+    
+    
+    
 
 }
 

@@ -39,11 +39,12 @@ const postUser = async (req, res) => {
 
 
 
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
     const { id } = req.params;
     const { name, email } = req.body;
+    console.log(id, name, email);
     try {
-        let update = updateUserCtrl(name, email, id)
+        let update = await updateUserCtrl(name, email, id)
         res.status(200).json(update)
 
 
@@ -54,11 +55,15 @@ const updateUser = (req, res) => {
 }
 
 
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
+    const { id } = req.params;
     try {
-        let deleteGame = deleteUserCtrl()
+
+        let deleteGame = await deleteUserCtrl(id)
+
         res.status(200).json(deleteGame)
     } catch (error) {
+
         res.status(400).json({ error: error.message })
 
     }
